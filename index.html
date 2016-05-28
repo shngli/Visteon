@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	
+	<title>visteon dashboard display prototype</title>
+	
+	<!-- <link rel="stylesheet" href="/css/screen.css"> -->
+	
+	<!-- <script src="/js/global.js"></script> -->
+	<script src="js/protovis.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+// DISPLAY MANAGER 
+//TEMPERATURE GAUGE & MILEAGE
+
+			$(".dashboard-x").hide();
+			// 
+			// $("#display-mgr-btn").click(function(){
+			// 	$(".dashboard-x").toggle();
+			// 	$(this).toggleClass("btn-selected");
+			// });
+			// 
+			// $("#temperature a").click(function(){
+			// 	$("#temperature").remove();
+			// });
+			// $("#mileage a").click(function(){
+			// 	$("#mileage").remove();
+			// });
+
+			
+
+//GAS ICON
+			
+			// $("#gas-btn").toggle(function(){
+			// 	$(this).animate({
+			// 		left:"1035px"
+			// 	},500);},function(){
+			// 		$(this).animate({
+			// 			left:"1140px"
+			// 		},500);
+			// 	});
+			
+// DISPLAY TOGGLE
+
+			// $("#toggle-btn").toggle(function(){
+			// 	displayOff();
+			// },function(){
+			// 	resetAlerts();
+			// });
+
+			$("#toggle-btn").toggle(function(){
+				displayOn();
+			},function(){
+				displayOff();
+			});
+
+			// function toggleOn(){
+			// 	// $("#toggle-btn").addClass("btn-selected");
+			// 	$("#on").show();
+			// 	$("#off").hide();
+			// 	$("#gas-btn").animate({left:"1035px"},500);
+			// };
+			
+			// function toggleOff(){
+			// 	// $("#toggle-btn").removeClass("btn-selected");
+			// 	$("#on").hide();
+			// 	$("#off").show();
+			// 	$("#gas-btn").animate({left:"1140px"},500);
+			// };
+
+			$("#accelthirty").click(function(){
+				displayOff();
+				$("#thirty-dot").show();
+			});
+			
+			$("#limitfifty").click(function(){
+				$("#thirty-dot").fadeOut("medium");
+				$("#fifty-dot").fadeIn("medium");
+			});
+			
+// ALERTS HIDE/SHOW			
+			
+			$("#buckle-seatbelt").click(function(){
+				$("#seatbelt-alert").fadeOut("medium");
+			});
+			
+			var fadeDuration = 350; //time in milliseconds
+			
+			function resetAlerts(){
+				$(".hidden-dots").hide();
+				$(".new-dot").hide();
+				$(".expanded-alert").show("slow");
+				$("#hidden-dots").fadeOut("medium");
+				$("#gas-btn span#gas-icon").css({
+					"background-color":"rgba(0, 100, 0, 0.5)",
+					"height":"55px"
+				});
+				$("#gas-btn span#gas-percent").html("75%");
+				$("#temperature").show("medium");
+				$("#mileage").show("medium");
+				$("#seatbelt-alert").show("medium");
+				displayOn();
+			};
+			
+			resetAlerts();
+			
+			function displayOff(){
+				$(".expanded-alert").animate({
+					top:-20
+				}, fadeDuration).fadeOut(fadeDuration);
+				$(".hidden-dots").delay(200).fadeIn("medium");
+				$("#temperature").fadeOut(fadeDuration);
+				$("#mileage").fadeOut(fadeDuration);
+				$("#on").hide();
+				$("#off").show();
+				$("#gas-btn").animate({left:"1140px"},500);
+			};
+
+			function displayOn(){
+				$(".expanded-alert").animate({
+					top:-20
+				}, fadeDuration).fadeIn(fadeDuration);
+				$(".hidden-dots").delay(200).fadeOut("medium");
+				$("#temperature").fadeIn(fadeDuration);
+				$("#mileage").fadeIn(fadeDuration);
+				$("#on").show();
+				$("#off").hide();
+				$("#gas-btn").animate({left:"1035px"},500);
+			};
+			
+			$("#alerts-reset").click(function(){
+				resetAlerts();
+			});
+			
+			$(".extra-alert").hide();
+			$("#new-alert").click(function(){
+				$("div.extra-alert")
+				.fadeIn("fast")
+				.delay(1500)
+				.fadeOut("slow");
+				
+				$("#gas-btn span#gas-icon").css({
+					"height":"15px",
+					"background-color":"rgba(200, 54, 54, 0.5)"
+				});
+				
+				$("#gas-btn span#gas-percent").html("10%");
+				$("#gas-btn span#miles-to-go").html("35 miles to go");
+				
+				$(".new-dot")
+				.delay(1500)
+				.show("slow");
+			});
+		});
+	</script>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	
+		body{
+			font-family: 'Droid Sans', sans-serif;
+		}
+		#dashboard{
+			width:1240px;
+			height:550px;
+			position:fixed;
+			top:5px;
+			left:5px;
+			background:#000000;
+		}
+		#seatbelt-alert{
+			position:fixed;
+			height:80px;
+			width:80px;
+			top:20px;
+			left:515px;
+			background:url(images/seatbelt.png) no-repeat;
+		}
+		#speedometer{
+			background:url(images/speedometer-ticks.png) no-repeat 50px 22px;
+
+		}
+		#alerts-wrapper{
+			position:fixed;
+			top:50px;
+			left:20px;
+		}
+		#alerts{
+			color:#ffffff;
+		}
+		.alert{
+			height:30px;
+		}
+		.touch-btn{
+			padding:15px;
+			background-color:white;
+			color:#5E5E5E;
+			border-radius:12px 0 0 12px;
+			text-decoration:none;
+			font-size:1.1em;
+			width:140px;
+			left:1075px;
+			height:25px;
+			text-align:center;	
+			display:block;		
+		}
+		.btn-selected{
+			background-color:#87cefa;
+/*			width:160px;*/
+			left:1055px;
+		}
+		#text-alerts{
+			height:100px;
+		}
+		.alert-text{
+			font-size:18px;
+			margin-top:22px;
+			display:block;
+			width:300px;
+		}
+		.red-dot{
+			color:red;
+			font-size:50px;
+			float:left;
+			padding:4px 10px 0 0;
+		}
+		.yellow-dot{
+			color:yellow;
+			font-size:50px;
+			float:left;
+			padding:4px 10px 0 0;
+		}
+		.hidden-dots, .new-dot{
+			font-size:50px;
+			padding-right:8px;
+		}
+		#display-mgr-btn{
+			border-radius:12px;
+			position:fixed;
+			left:1050px;
+			top:480px;
+		}
+		#gas-btn{
+			background:url(images/gas.png) no-repeat #fff 20px;			
+			height:50px;
+			width:200px;
+			position:fixed;
+			top:250px;
+			left:1035px;
+		}
+		#gas-btn #gas-icon{
+			background-color:rgba(0, 100, 0, 0.5);
+			display:block;
+			position:absolute;
+			bottom:0;
+			height:55px;
+			margin-left:-15px;
+			margin-top:10px;
+			width:105px;
+			border-radius:0 0 0 12px;
+		}
+		#gas-btn #gas-percent{
+			background-color:#ffffff;
+			margin-left:80px;
+			font-size:40px;
+		}
+		#gas-btn #miles-to-go{
+			display:block;
+			font-size:.8em;
+			clear:both;
+			margin-left:83px;
+		}
+		#toggle-btn{
+		}
+		.green-dot{
+			color:green;
+			font-size:30px;
+			padding:4px 10px 0 0;
+		}
+		#thirty-dot{
+			display:none;
+			position:fixed;
+			left:310px;
+			top:220px;
+		}		
+		#fifty-dot{
+			display:none;
+			position:fixed;
+			left:390px;
+			top:145px;
+		}
+		#mileage{
+			position:absolute;
+			height:100px;
+			width:200px;
+			top:400px;
+			left:525px;
+			color:white;
+			font-size:1.3em;
+		}
+		#mileage a{
+			display:block;
+			height:35px;
+			width:35px;
+			position:absolute;
+			left:68px;
+			bottom:90px;
+			background:url(images/close.png) no-repeat;
+		}
+		#temperature{
+			background:url(images/temp.png) no-repeat;
+			position:absolute;
+			height:250px;
+			width:200px;
+			top:250px;
+			left:20px;
+			color:white;
+		}
+		#temperature a{
+			display:block;
+			height:35px;
+			width:35px;
+			position:absolute;
+			left:40px;
+			bottom:200px;
+			background:url(images/close.png) no-repeat;
+		}
+		footer{
+			position:fixed;
+			top:570px;
+			left:60px;
+		}
+	</style>
+	
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<header>
+		
+	</header>
+	<div id="dashboard">
+		<div id="seatbelt-alert"></div>
+		<div id="temperature"><a href="#" class="dashboard-x"></a></div>
+		<div id="mileage">26,000<a href="#" class="dashboard-x"></a></div>
+		
+		<!-- <a href="#" id="display-mgr-btn" class="touch-btn">display manager</a> -->
+		
+		<a href="#" id="gas-btn" class="touch-btn"><span id="gas-icon"></span><span id="gas-percent">75%</span><span id="miles-to-go">262 miles to go</span></a>
+		
+		<div id="speedometer">
+			<script type="text/javascript+protovis">
+
+						var radius = 1000 / 2;
+			
+						function notspeeding() {
+						  var speedvar = .17;
+						  return [
+						      {value: speedvar, index: .3}
+						    ];
+						}
+			
+						function speeding() {
+						  var speedvar = .1;
+						  return [
+						      {value: speedvar, index: .3},
+						    ];
+						}
+			
+						var vis = new pv.Panel()
+						    .width(radius * 2)
+						    .height(radius * 2);
+			
+						vis.render();
+			
+						function accelthirty(){
+							vis.add(pv.Wedge)
+							    .data(notspeeding)
+							    .left(550)
+							    .bottom(604)
+							    .innerRadius(function(d) radius * d.index)
+							    .outerRadius(function(d) radius * (d.index + .13))
+							    .startAngle(Math.PI)
+							    .angle(function(d) 1.11 * Math.PI * d.value)
+							    .fillStyle(pv.colors("#98df8a"))
+							vis.render();
+						};
+						
+						
+						function accelfifty(){
+							vis.add(pv.Wedge)
+							    .data(notspeeding)
+							    .left(550)
+							    .bottom(604)
+							    .innerRadius(function(d) radius * d.index)
+							    .outerRadius(function(d) radius * (d.index + .13))
+							    .startAngle(Math.PI)
+							    .angle(function(d) 1.85 * Math.PI * d.value)
+							    .fillStyle(pv.colors("#98df8a"))
+							vis.render();
+						};
+			
+						function accelseventy(){
+							vis.add(pv.Wedge)
+							    .data(speeding)
+							    .left(550)
+							    .bottom(604)
+							    .innerRadius(function(d) radius * d.index)
+							    .outerRadius(function(d) radius * (d.index + .13))
+							    .startAngle(3.94*Math.PI/3)
+							    .angle(function(d) 1.3 * Math.PI * d.value)
+							    .fillStyle(pv.colors("#ff9896"))
+							vis.render();
+						};
+						
+						function limitthirty(){
+							vis.add(pv.Wedge)
+							    .data(speeding)
+							    .left(550)
+							    .bottom(604)
+							    .innerRadius(function(d) radius * d.index)
+							    .outerRadius(function(d) radius * (d.index + .13))
+							    .startAngle(3.56*Math.PI/3)
+							    .angle(function(d) .04 * Math.PI * d.value)
+							    .fillStyle(pv.colors("#ff9896"))
+							vis.render();
+						};
+						
+						function limitfifty(){
+							vis.add(pv.Wedge)
+							    .data(speeding)
+							    .left(550)
+							    .bottom(604)
+							    .innerRadius(function(d) radius * d.index)
+							    .outerRadius(function(d) radius * (d.index + .13))
+							    .startAngle(3.94*Math.PI/3)
+							    .angle(function(d) .04 * Math.PI * d.value)
+							    .fillStyle(pv.colors("#ff9896"))
+							vis.render();
+						};
+						
+						// limitthirty();
+						// limitfifty();
+						// accelthirty();
+						// accelfifty();
+						// accelseventy();
+			</script>
+		</div>
+
+		<!-- <span class="green-dot" id="thirty-dot">•</span>		
+		<span class="green-dot" id="fifty-dot">•</span> -->
+		<div id="alerts-wrapper">
+			<div id="alerts">
+				
+				<div id="text-alerts">
+					<div class="alert">
+						<span class="expanded-alert">
+							<span class="red-dot">•</span>
+							<span class="alert-text"> Check Transmission</span>
+						</span>
+					</div>
+					<div class="alert">
+						<span class="expanded-alert">
+							<span class="yellow-dot">•</span>
+							<span class="alert-text"> Check Oil</span>
+						</span>
+					</div>
+					<div class="extra-alert">
+						<span class="expanded-alert">
+							<span class="yellow-dot">•</span>
+							<span class="alert-text"> Check Fuel</span>
+						</span>
+					</div>
+				</div>
+				
+				<div class="alert"><span class="hidden-dots red-dot">•</span><span class="hidden-dots yellow-dot">•</span><span class="new-dot yellow-dot">•</span></div>
+				
+			</div>
+		</div>
+		
+		
+	</div>
+	<footer>
+		<!-- <a href="#" id="alerts-fade">begin driving</a> | --> <a href="#" id="buckle-seatbelt">buckle seatbelt</a> | <a href="#" id="accelthirty" onclick="accelthirty(); return false;">accelerate to 30</a> | <a href="#" id="limitfifty" onclick="limitfifty(); return false;">increase speed limit</a> | <a href="#" id="accelfifty" onclick="accelfifty(); return false;">accelerate to 50</a> | <a href="#" id="new-alert">new alert</a>
+		 | <a href="#" onclick="accelseventy(); return false;">accelerate to 70</a> | <a href="#" id="toggle-btn">Full Display: <span id="on">On</span><span id="off" style="display:none;">Off</span></a> | <a href="#" id="alerts-reset" onclick="location.reload();">reset</a>
+	</footer>
+</body>
+</html>

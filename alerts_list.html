@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>stack_display</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" />
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+	<style type="text/css">
+		#alerts-list li{
+			height:80px;
+			background-color:#ccc;
+		}
+		#alerts-list a{
+			display:block;
+		}
+		#alerts-list img{
+			float:left;
+			padding:5px;
+		}
+		.alert-teaser{
+/*			padding-left:0px;*/
+		}
+		.ui-bar-a{
+			ackground-color: #9badcc;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#9badcc), to(#687fa6));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -moz-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -ms-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -o-linear-gradient(top, #9badcc, #687fa6);
+    background-image: linear-gradient(top, #9badcc, #687fa6);
+		}
+/*		.ui-btn-up-a{
+			background:#52a48a;
+			background-image:-webkit-gradient(linear,left top,left bottom,from(#6edbb8),to(#52a48a));
+			background-image:-webkit-linear-gradient(top,#6edbb8,#52a48a);
+			background-image:-moz-linear-gradient(top,#6edbb8,#52a48a);
+			background-image:-ms-linear-gradient(top,#6edbb8,#52a48a);
+			background-image:-o-linear-gradient(top,#6edbb8,#52a48a);
+			background-image:linear-gradient(top,#6edbb8,#52a48a)
+		}*/
+		.ui-btn-up-a{
+			background-color: #8c9cbf;
+	 		 background-image: -webkit-gradient(linear, left top, left bottom, from(#8c9cbf 0%), to(#546a9e 50%));
+	 		 /* Saf4+, Chrome */
+		  background-image: -webkit-linear-gradient(top, #8c9cbf 0%, #546a9e 50%, #36518f 50%, #3d5691 100%);
+		  background-image: -moz-linear-gradient(top, #8c9cbf 0%, #546a9e 50%, #36518f 50%, #3d5691 100%);
+		  background-image: -ms-linear-gradient(top, #8c9cbf 0%, #546a9e 50%, #36518f 50%, #3d5691 100%);
+		  background-image: -o-linear-gradient(top, #8c9cbf 0%, #546a9e 50%, #36518f 50%, #3d5691 100%);
+		  background-image: linear-gradient(top, #8c9cbf 0%, #546a9e 50%, #36518f 50%, #3d5691 100%);
+			/*
+background:#425c5b;
+			background-image:-webkit-gradient(linear,left top,left bottom,from(#587b7a),to(#425c5b));
+			background-image:-webkit-linear-gradient(top,#587b7a,#425c5b);
+			background-image:-moz-linear-gradient(top,#587b7a,#425c5b);
+			background-image:-ms-linear-gradient(top,#587b7a,#425c5b);
+			background-image:-o-linear-gradient(top,#587b7a,#425c5b);
+			background-image:linear-gradient(top,#587b7a,#425c5b)
+*/
+		}
+	</style>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div data-role="page">
+
+		<div data-role="header">
+			<a data-rel="back" class="ui-btn-left ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-a" data-icon="arrow-l" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true"><span class="ui-btn-text">back</span><span class="ui-icon ui-icon-arrow-l ui-icon-shadow"></span></span></a>
+			<h1>Current Alerts</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">	
+			<ul data-role="listview" data-theme="g" id="alerts-list">
+				<li><img src="images/reddot.png"><a href="transmission.html"><strong>Check Transmission</strong><br/><span class="alert-teaser">The automatic transmission's primary job is to allow the engine to operate in its narrow range...</span></a></li>
+				<li><img src="images/yellowdot.png"><a href="oilchange.html"><strong>Change Oil</strong><br/><span class="alert-teaser">Changing your car's oil at regular intervals is a vital part of keeping your engine running properly...</span>
+					</a></li>
+			</ul>		
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+</body>
+</html>
